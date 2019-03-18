@@ -2,9 +2,11 @@
 # 1. Open command prompt as administrator (windows search "CMD", right click, run as admin)
 # 2. Run the command "python -m pip install -U pip"
 # 3. Run the command "python -m pip install HTMLParser"
+# 4. Run the command "python -m pip install requests"
 
 # Usage (must be done for each album)
 # 1. Double click this file (khinsider-album-dl.py)
+# 2. Enter the album of the URL to be downloaded
 
 import requests
 from html.parser import HTMLParser
@@ -70,7 +72,6 @@ class KhinsiderAlbumParser(HTMLParser):
 class KhinsiderAudioParser(HTMLParser):
     def __init__(self):
         self.nameScan = False
-        self.audioScan = False
         self.audioName = ""
         return super().__init__()
 
