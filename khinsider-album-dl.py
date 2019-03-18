@@ -4,27 +4,30 @@
 # 3. Run the command "python -m pip install HTMLParser"
 
 # Usage (must be done for each album)
-# 1. Change the URL below to the url of the album
-albumUrl = "https://downloads.khinsider.com/game-soundtracks/album/legend-of-zelda-the-twilight-princess-gamerip"
-# 2. Double click this file (khinsider-album-dl.py)
+# 1. Double click this file (khinsider-album-dl.py)
 
 import requests
 from html.parser import HTMLParser
 import os
+import sys
 
 saveDir = ""
 
 def main(argv):
     global saveDir
-    
+
+    albumUrl = input("Album URL: ")
     response = requests.get(albumUrl)
     htmlData = response.content.decode("utf-8")
 
-    saveDir = albumUrl.split("/")[-1]+"/"
+    saveDir = albumUrl.split("/")[-1]
     try:
         os.mkdir(saveDir)
+        print("Created folder \"{}\"".format(saveDir))
     except FileExistsError:
-        print("Saving in exsisting directory \"{}\"".format(saveDir))
+        print("Saving in exsisting folder \"{}\"".format(saveDir))
+
+    saveDir += "/"
         
     albumParser = KhinsiderAlbumParser()
     albumParser.feed(htmlData)
