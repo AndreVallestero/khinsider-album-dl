@@ -1,3 +1,13 @@
+# Installation (only has to be setup once)
+# 1. Open command prompt as administrator (windows search "CMD", right click, run as admin)
+# 2. Run the command "python -m pip install -U pip"
+# 3. Run the command "python -m pip install HTMLParser"
+
+# Usage (must be done for each album)
+# 1. Change the URL below to the url of the album
+albumUrl = "https://downloads.khinsider.com/game-soundtracks/album/legend-of-zelda-the-twilight-princess-gamerip"
+# 2. Double click this file (khinsider-album-dl.py)
+
 import requests
 from html.parser import HTMLParser
 import os
@@ -6,13 +16,11 @@ saveDir = ""
 
 def main(argv):
     global saveDir
-
-    url = "https://downloads.khinsider.com/game-soundtracks/album/legend-of-zelda-the-twilight-princess-gamerip"
     
-    response = requests.get(url)
+    response = requests.get(albumUrl)
     htmlData = response.content.decode("utf-8")
 
-    saveDir = url.split("/")[-1]+"/"
+    saveDir = albumUrl.split("/")[-1]+"/"
     try:
         os.mkdir(saveDir)
     except FileExistsError:
